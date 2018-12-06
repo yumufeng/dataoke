@@ -16,7 +16,9 @@ require 'cache.php';
 $http = new swoole_http_server("0.0.0.0", 9501);
 $http->set(array(
     'worker_num' => 2,
-    'daemonize' => 0,
+    'daemonize' => 1,
+    'document_root' => getcwd().'/public',
+    'enable_static_handler' => true,
     'max_request' => 10000,
 ));
 $http->on('request', function (swoole_http_request $request, swoole_http_response $response) {
