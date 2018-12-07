@@ -7,7 +7,7 @@
  */
 
 return [
-    'appId' => '1165567',
-    'appKey' => '50F8E7E4986FD3D86491ABEACA90C67F',
+    'appId' => '',
+    'appKey' => '',
     'host' => 'http://cms5.dataoke.com'
 ];
