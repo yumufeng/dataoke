@@ -11,4 +11,7 @@
 
 **使用方式**
 
+配置 config.php里的AppId和APPKEY即可
+
+
 命令控制台: php swoole.php 即可启动
