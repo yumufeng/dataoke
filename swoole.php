@@ -39,8 +39,8 @@ $http->on('request', function (swoole_http_request $request, swoole_http_respons
     if (!empty($query_string)) {
         $requestUri .= '?' . $query_string;
     }
-    $key = md5($requestUri . $requestHelper->isMobile() . $requestHelper->isIPad() . $requestHelper->isIPhone() . $requestHelper->isMicroMessenger() . $requestHelper->isWeibo());
-    if ($requestMethod == 'GET') {
+    $key = md5($requestMethod.$requestUri . $requestHelper->isMobile() . $requestHelper->isIPad() . $requestHelper->isIPhone() . $requestHelper->isMicroMessenger() . $requestHelper->isWeibo());
+    if ($requestMethod == 'GET' || $requestMethod == 'POST') {
         $cacheData = $cachehelper->get($key);
         if ($cacheData !== false && !empty($cacheData)) {
             return $response->end($cacheData);
@@ -53,7 +53,7 @@ $http->on('request', function (swoole_http_request $request, swoole_http_respons
     if (($html === false)) {
         return;
     }
-    if (($requestMethod == 'GET') && $httpHelper->httpCode == 200 && !empty($html)) {
+    if ($httpHelper->httpCode == 200 && !empty($html)) {
         $cache_check = isset($cookie['cache_check']) ? $cookie['cache_check'] : null;
         $expire = empty($cache_check) ? 360 : 600;
         $response->header('Dtk-Cache-Check-time', $expire);
